@@ -8,8 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.gadgetbadget.ws.DatabaseUtils;
-import net.gadgetbadget.ws.Project;
 
 public class ProjectDAO {
 	
@@ -115,13 +113,6 @@ public class ProjectDAO {
 	}
 	
 	public Project get(int id) {
-//		Product productToFind = new Product(id);
-//		
-//		int index = data.indexOf(productToFind);
-//		if(index >= 0) {
-//			return data.get(index);
-//		}
-//		return null;
 		Project project = null;
 		try {
 			connection = DatabaseUtils.getConnection();
@@ -168,13 +159,6 @@ public class ProjectDAO {
 	}
 	
 	public boolean update(Project project) {
-//		int index = data.indexOf(product);
-//		if(index >= 0) {
-//			data.set(index, product);
-//			return true;
-//		}
-//		return false;
-		//int index = data.indexOf(product);
 		try {
 			connection = DatabaseUtils.getConnection();
 			preparedStatement = connection.prepareStatement("Update projects set proj_Name =?, proj_Description = ?, proj_Duration =?, proj_Budget = ? , user_Id = ? where proj_Id = ?");
@@ -201,16 +185,6 @@ public class ProjectDAO {
 	}
 	
 	public boolean delete(int id) {
-//		Product productToFind = new Product(id);
-//		
-//		int index = data.indexOf(productToFind);
-//		if(index >= 0) {
-//			 data.remove(index);
-//			 return true;
-//		}
-//		return false;
-		//Product productToFind = new Product(id);
-		//int index = data.indexOf(productToFind);
 		try {
 			connection = DatabaseUtils.getConnection();
 			preparedStatement = connection.prepareStatement("delete from projects where proj_Id = ?");
