@@ -41,6 +41,7 @@ public class UserResource {
 	@Produces(MediaType.TEXT_PLAIN)
 	public String add(@FormParam("user_Type") String userType,
 			          @FormParam("user_Name") String userName,
+			          @FormParam("password") String password,
 			          @FormParam("user_email") String email,
 			          @FormParam("user_phone") String phone,
 			          @FormParam("user_address") String address) throws URISyntaxException {
@@ -48,6 +49,7 @@ public class UserResource {
 		User user = new User();
 		user.setUserType(userType);
 		user.setUserName(userName);
+		user.setPassword(password);
 		user.setEmail(email);
 		user.setPhone(phone);
 		user.setAddress(address);

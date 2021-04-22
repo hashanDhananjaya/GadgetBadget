@@ -1,10 +1,13 @@
 package net.gadgetbadget.ws;
 
+
+
 public class User {
 	
 	 private int userId;
 	 private String userType;
 	 private String userName;
+	 private String password;
 	 private String email;
 	 private String phone;
 	 private String address;
@@ -12,11 +15,12 @@ public class User {
 	public User() {
 		
 	}
-	public User(int userId, String userType, String userName, String email, String phone, String address) {
-		super();
+	public User(int userId, String userType, String userName,String password, String email, String phone, String address) {
+		
 		this.userId = userId;
 		this.userType = userType;
 		this.userName = userName;
+		this.password = password;
 		this.email = email;
 		this.phone = phone;
 		this.address = address;
@@ -56,6 +60,13 @@ public class User {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	@Override
 	public int hashCode() {

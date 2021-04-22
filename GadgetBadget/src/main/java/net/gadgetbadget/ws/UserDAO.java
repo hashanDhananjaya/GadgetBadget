@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class UserDAO {
 	
 private static UserDAO instance;
@@ -37,11 +39,12 @@ private static UserDAO instance;
 				int userId = res.getInt("user_Id");
 				String userType = res.getString("user_Type");
 				String userName = res.getString("user_Name");
+				String password = res.getString("password");
 				String email = res.getString("user_email");
 				String phone = res.getString("user_phone");
 				String address = res.getString("user_address");
 			
-				User user = new User(userId, userType, userName, email, phone, address);
+				User user = new User(userId, userType, userName,password, email, phone, address);
 				users.add(user);
 				
 				
@@ -54,12 +57,13 @@ private static UserDAO instance;
 		}	
 		
 		return users;
+		
 	}
 	
-	public int add(User user) {		
+	public int add( User user) {		
 		try {
 			connection = DatabaseUtils.getConnection();
-			preparedStatement = connection.prepareStatement("insert into users(user_Type, user_Name, user_email, user_phone, user_address) values(?, ?, ?, ?, ?)", 
+			preparedStatement = connection.prepareStatement("insert into users(user_Type, user_Name, user_email, user_phone, user_address,password) values(?, ?, ?, ?, ?,?)", 
 					Statement.RETURN_GENERATED_KEYS);
 			
 			preparedStatement.setString(1, user.getUserType());
@@ -67,12 +71,13 @@ private static UserDAO instance;
 			preparedStatement.setString(3, user.getEmail());
 			preparedStatement.setString(4, user.getPhone());
 			preparedStatement.setString(5, user.getAddress());
+			preparedStatement.setString(6, user.getPassword());
 			
 			// Add User
 			int affectedRows = preparedStatement.executeUpdate();
 			
 			if (affectedRows == 0) {
-	            throw new SQLException("Adding project failed, no rows affected.");
+	            throw new SQLException("Adding user failed, no rows affected.");
 	        }
 
 	        try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
@@ -80,7 +85,7 @@ private static UserDAO instance;
 	                return (int) generatedKeys.getLong(1);
 	            }
 	            else {
-	                throw new SQLException("Adding project failed, no ID obtained.");
+	                throw new SQLException("Adding user failed, no ID obtained.");
 	            }
 	        }
 			
@@ -122,11 +127,12 @@ private static UserDAO instance;
 				int userId = res.getInt("user_Id");
 				String userType = res.getString("user_Type");
 				String userName = res.getString("user_Name");
+				String password = res.getString("password");
 				String email = res.getString("user_email");
 				String phone = res.getString("user_phone");
 				String address = res.getString("user_address");
 				
-				 user = new User(userId, userType, userName, email, phone, address);
+				 user = new User(userId, userType, userName,password, email, phone, address);
 
 			}
 				
@@ -159,13 +165,14 @@ private static UserDAO instance;
 	public boolean update(User user) {
 		try {
 			connection = DatabaseUtils.getConnection();
-			preparedStatement = connection.prepareStatement("Update users set user_Type =?, user_Name = ?, user_email =?, user_phone = ? , user_address = ? where user_Id = ?");
+			preparedStatement = connection.prepareStatement("Update users set user_Type =?, user_Name = ?, user_email =?, user_phone = ? , user_address = ?,password = ? where user_Id = ?");
 				
 			preparedStatement.setString(1, user.getUserType());
 			preparedStatement.setString(2, user.getUserName());
 			preparedStatement.setString(3, user.getEmail());
 			preparedStatement.setString(4, user.getPhone());
 			preparedStatement.setString(5, user.getAddress());
+			preparedStatement.setString(6,user.getPassword());
 			preparedStatement.setInt(6, user.getUserId());
 
 			int affectedRows = preparedStatement.executeUpdate();
