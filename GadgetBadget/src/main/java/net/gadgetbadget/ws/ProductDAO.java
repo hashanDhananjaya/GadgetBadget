@@ -62,7 +62,7 @@ private static ProductDAO instance;
 			preparedStatement.setString(2, product.getProduct_Description());
 			preparedStatement.setString(3, product.getManufactured_date());
 			preparedStatement.setFloat(4, product.getPrice());
-			
+			//
 			// Add Product
 			int affectedRows = preparedStatement.executeUpdate();
 			

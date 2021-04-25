@@ -18,7 +18,7 @@ import jakarta.ws.rs.core.Response;
 
 @Path("/product")
 public class ProductResource {
-//
+
 	private ProductDAO dao = ProductDAO.getInstance();
 	
 	@GET
