@@ -52,7 +52,7 @@ public class Product {
 	public void setManufactured_date(String manufactured_date) {
 		this.manufactured_date = manufactured_date;
 	}
-
+//
 	public float getPrice() {
 		return price;
 	}

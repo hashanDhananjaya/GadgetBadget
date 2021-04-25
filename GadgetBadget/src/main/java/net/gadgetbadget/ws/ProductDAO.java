@@ -25,7 +25,6 @@ private static ProductDAO instance;
 	}
 	
 	public List<Product> ListAll(){
-		//return new ArrayList<product>(data);
 		List<Product>products  = new ArrayList<Product>();
 		
 		try {
@@ -56,7 +55,7 @@ private static ProductDAO instance;
 	public int add(Product product) {		
 		try {
 			connection = DatabaseUtils.getConnection();
-			preparedStatement = connection.prepareStatement("insert into product(product_Name, product_Description, manufactured_date, price) values(?, ?, ?)", 
+			preparedStatement = connection.prepareStatement("insert into product(product_Name, product_Description, manufactured_date, price) values(?, ?, ?, ?)", 
 					Statement.RETURN_GENERATED_KEYS);
 			
 			preparedStatement.setString(1, product.getProduct_Name());
@@ -111,7 +110,7 @@ private static ProductDAO instance;
 		Product product = null;
 		try {
 			connection = DatabaseUtils.getConnection();
-			preparedStatement = connection.prepareStatement("select * from product where = product_Id ?");
+			preparedStatement = connection.prepareStatement("select * from product where product_Id = ?");
 			preparedStatement.setInt(1, id);
 			
 			ResultSet rs = preparedStatement.executeQuery();
@@ -156,13 +155,13 @@ private static ProductDAO instance;
 	public boolean update(Product product) {
 		try {
 			connection = DatabaseUtils.getConnection();
-			preparedStatement = connection.prepareStatement("Update product set product_Name =?, product_Description = ?, manufactured_date =?, price =? where product Id = ?");
+			preparedStatement = connection.prepareStatement("Update product set product_Name =?, product_Description = ?, manufactured_date =?, price =? where product_Id = ?");
 				
 			preparedStatement.setString(1, product.getProduct_Name());
 			preparedStatement.setString(2, product.getProduct_Description());
 			preparedStatement.setString(3, product.getManufactured_date());
 			preparedStatement.setFloat(4, product.getPrice());
-			preparedStatement.setInt(6, product.getProduct_Id());
+			preparedStatement.setInt(5, product.getProduct_Id());
 			
 			int affectedRows = preparedStatement.executeUpdate();
 			if(affectedRows==1) {
@@ -181,7 +180,7 @@ private static ProductDAO instance;
 	public boolean delete(int id) {
 		try {
 			connection = DatabaseUtils.getConnection();
-			preparedStatement = connection.prepareStatement("delete from products where product_Id = ?");
+			preparedStatement = connection.prepareStatement("delete from product where product_Id = ?");
 			preparedStatement.setInt(1, id);			
 			
 			int affectedRows = preparedStatement.executeUpdate();
